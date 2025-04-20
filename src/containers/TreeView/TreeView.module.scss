@@ -10,13 +10,19 @@
     align-items: center;
     padding-left: 1rem;
 
-    .expanded {
+    .displayed {
       margin-left: calc(var(--level) * 1rem);
+    }
 
+    .expanded {
       svg {
         transform: rotate(0deg);
-        transition-duration: 0.2s;
+        transition-duration: 0.1s;
       }
+    }
+
+    .hide {
+      visibility: hidden;
     }
   }
 }

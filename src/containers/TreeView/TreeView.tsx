@@ -28,7 +28,11 @@ const TreeView = () => {
             className={styles.TreeItem}
           >
             <Button
-              className={classNames(node.isExpanded && styles.expanded)}
+              className={classNames(
+                node.isDisplayed && styles.displayed,
+                node.isExpanded && styles.expanded,
+                node.children.length === 0 && styles.hide,
+              )}
               onClick={() => {
                 node.toggleExpand();
                 setVisibleNodes();
@@ -36,7 +40,7 @@ const TreeView = () => {
               variant="link"
             >
               <Arrow width="10" height="6" />
-            </Button>{' '}
+            </Button>
             <span>{node.name}</span>
           </div>
         ))}

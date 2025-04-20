@@ -6,6 +6,7 @@ export class TreeNode {
   children: TreeNode[];
   isExpanded: boolean;
   isSelected: boolean;
+  _isDisplayed: boolean = false;
   data: RawNode;
   parents: TreeNode[];
 
@@ -26,12 +27,28 @@ export class TreeNode {
   toggleExpand() {
     this.isExpanded = !this.isExpanded;
     this.children.forEach((child) => {
-      child.isExpanded = this.isExpanded;
+      child.isDisplayed = this.isExpanded;
     });
   }
 
   toggleSelect() {
     this.isSelected = !this.isSelected;
+  }
+
+  get isDisplayed() {
+    return this._isDisplayed;
+  }
+
+  set isDisplayed(value: boolean) {
+    this._isDisplayed = value;
+
+    if (value === false) {
+      this.children.forEach((child) => {
+        child.isDisplayed = false;
+      });
+
+      this.isExpanded = false;
+    }
   }
 
   static parse(
