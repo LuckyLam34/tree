@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { FixedSizeList as List } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import styles from './TreeView.module.scss';
-import { Arrow } from '../../components/Icons';
-import { Button } from 'react-bootstrap';
 import { useTreeStore } from './store';
-import classNames from 'classnames';
+import { TreeRow } from './components';
 
 const TreeView = () => {
   const nodes = useTreeStore((state) => state.visibleNodes);
@@ -19,32 +19,25 @@ const TreeView = () => {
   }, []);
 
   return (
-    <div className={styles.TreeView}>
-      <div>
-        {nodes.map((node) => (
-          <div
-            key={node.id}
-            style={{ '--level': node.parents.length } as React.CSSProperties}
-            className={styles.TreeItem}
+    <div className={styles.TreeViewContainer}>
+      <AutoSizer>
+        {({ width, height }) => (
+          <List
+            itemCount={nodes.length}
+            itemSize={40}
+            width={width}
+            height={height}
           >
-            <Button
-              className={classNames(
-                node.isDisplayed && styles.displayed,
-                node.isExpanded && styles.expanded,
-                node.children.length === 0 && styles.hide,
-              )}
-              onClick={() => {
-                node.toggleExpand();
-                setVisibleNodes();
-              }}
-              variant="link"
-            >
-              <Arrow width="10" height="6" />
-            </Button>
-            <span>{node.name}</span>
-          </div>
-        ))}
-      </div>
+            {({ index, style }) => (
+              <TreeRow
+                node={nodes[index]}
+                style={style}
+                setVisibleNodes={setVisibleNodes}
+              />
+            )}
+          </List>
+        )}
+      </AutoSizer>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// import './App.scss';
 import TreeView from './containers/TreeView';
 
 function App() {
