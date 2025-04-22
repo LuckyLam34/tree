@@ -14,7 +14,7 @@ export const useTreeStore = create<State>((set, get) => ({
   nodes: [],
   visibleNodes: [],
   setVisibleNodes: () => {
-    const visibleNodes = get().nodes.filter((node) => node.isDisplayed);
+    const visibleNodes = get().nodes.filter((node) => node.isVisible());
 
     set({ visibleNodes });
   },
@@ -27,9 +27,6 @@ export const useTreeStore = create<State>((set, get) => ({
     );
 
     const visibleNodes = parsedTree.filter((node) => node.parents.length === 0);
-    visibleNodes.forEach((node) => {
-      node.isDisplayed = true;
-    });
 
     set({
       nodes: parsedTree,

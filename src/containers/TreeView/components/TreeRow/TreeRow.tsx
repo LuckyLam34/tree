@@ -26,7 +26,7 @@ export const TreeRow = ({
       >
         <Button
           className={classNames(
-            node.isDisplayed && styles.displayed,
+            styles.displayed,
             node.isExpanded && styles.expanded,
             node.children.length === 0 && styles.hide,
           )}
