@@ -1,1 +1,2 @@
-export { default } from './TreeView';
+import TreeView from './TreeView';
+export { TreeView };

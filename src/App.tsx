@@ -1,4 +1,4 @@
-import TreeView from './containers/TreeView';
+import { TreeView } from './containers/TreeView';
 
 function App() {
   return (
