@@ -8,10 +8,12 @@ export const TreeRow = ({
   node,
   style,
   setVisibleNodes,
+  setMenu,
 }: {
   style: React.CSSProperties;
   node: TreeNode;
   setVisibleNodes: () => void;
+  setMenu: (position: { x: number; y: number }) => void;
 }) => {
   return (
     <div style={style}>
@@ -22,6 +24,10 @@ export const TreeRow = ({
             '--level': node?.parents.length,
           } as React.CSSProperties
         }
+        onContextMenu={(e) => {
+          e.preventDefault();
+          setMenu({ x: e.clientX, y: e.clientY });
+        }}
         className={styles.TreeRow}
       >
         <Button

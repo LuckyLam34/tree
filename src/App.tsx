@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
 import { TreeView } from './containers/TreeView';
+import { ContextMenu } from './components/ContextMenu';
 
 function App() {
   return (
     <>
-      <TreeView />
+      <ContextMenu>
+        <TreeView />
+      </ContextMenu>
     </>
   );
 }
